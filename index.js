@@ -82,9 +82,24 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
+function finalScore(inning, numInnings){
+  let homePoints = 0, awayPoints = 0;
+  let topTeam = true;
 
-  /*Code Here*/
+  for (let i=0; i<numInnings; i++) {
+    if (topTeam) {
+      awayPoints += inning();
+      topTeam = false;
+    } else {
+      homePoints += inning();
+      topTeam = true;
+    }
+  }
+  
+  return {
+    'Home': homePoints,
+    'Away': awayPoints
+  };
 
 }
 
