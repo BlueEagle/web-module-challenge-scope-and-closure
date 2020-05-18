@@ -134,6 +134,18 @@ function scoreboard(inning, numInnings) {
 
   return scoreString;
 }
-console.log(scoreboard(inning, 9));
+// console.log(scoreboard(inning, 9));
 
 
+// var addSix = createBase(6);
+// addSix(10); // returns 16
+// addSix(21); // returns 27
+function createBase(base) {
+  return function(addNum){
+    return base + addNum;
+  };
+}
+
+let addSix = createBase(6);
+console.log(addSix(10));
+console.log(addSix(21));
