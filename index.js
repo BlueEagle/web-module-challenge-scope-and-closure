@@ -27,10 +27,18 @@ function processFirstItem(stringList, callback) {
  * Study the code for counter1 and counter2. Answer the questions below.
  * 
  * 1. What is the difference between counter1 and counter2?
+ * counter1 is a closure, a function containing state information which is modified when it is invoked.
+ * counter2 is a function that merely accesses and modifies the state data of a variable in the global scope.
+ * 
  * 
  * 2. Which of the two uses a closure? How can you tell?
+ * The first case uses a closure. I can tell because the variable is a function with state information that persists across calls and is not garbage collected.
+ * 
  * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
+ * counter1 is better in situations where it may need to be reused. It is better code but is more complicated to implement and may not be necessary.
+ * counter2 is better in situations where it may only need to be used once. It is also easier to understand for those who are not familiar with this language feature.
+ * 
  *
 */
 
@@ -56,10 +64,8 @@ function counter2() {
 
 Write a function called `inning` that generates a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
-
-    /*Code Here*/
-
+function inning(){
+  return Math.floor(Math.random()*3);
 }
 
 /* Task 3: finalScore()
@@ -76,9 +82,18 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
+function finalScore(inning, numInnings){
+  let homePoints = 0, awayPoints = 0;
 
-  /*Code Here*/
+  for (let i=0; i<numInnings; i++) {
+    awayPoints += inning();
+    homePoints += inning();
+  }
+  
+  return {
+    Home: homePoints,
+    Away: awayPoints
+  };
 
 }
 
@@ -103,8 +118,34 @@ and returns the score at each pont in the game, like so:
 
 Final Score: 6 - 10 */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(inning, numInnings) {
+  let homePoints = 0, awayPoints = 0;
+  let scoreString = '';
+  let whichInning = 'st';
+  for (let i=1; i<=numInnings; i++) {
+    homePoints += inning();
+    awayPoints += inning();
+    if (i === 2) whichInning = 'nd';
+    if (i === 3) whichInning = 'rd';
+    if (i >= 4) whichInning = 'th';
+    scoreString += `${i+whichInning} inning: ${homePoints} - ${awayPoints}\n`;
+  }
+  scoreString += `\nFinal Score: ${homePoints} - ${awayPoints}`;
+
+  return scoreString;
+}
+// console.log(scoreboard(inning, 9));
+
+
+// var addSix = createBase(6);
+// addSix(10); // returns 16
+// addSix(21); // returns 27
+function createBase(base) {
+  return function(addNum){
+    return base + addNum;
+  };
 }
 
-
+let addSix = createBase(6);
+console.log(addSix(10));
+console.log(addSix(21));
