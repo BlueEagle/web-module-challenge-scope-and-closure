@@ -96,7 +96,6 @@ function finalScore(inning, numInnings){
   };
 
 }
-console.log(finalScore(inning, 9));
 
 /* Task 4: 
 
@@ -119,8 +118,22 @@ and returns the score at each pont in the game, like so:
 
 Final Score: 6 - 10 */
 
-function scoreboard(callback, numInnings) {
-  
+function scoreboard(inning, numInnings) {
+  let homePoints = 0, awayPoints = 0;
+  let scoreString = '';
+  let whichInning = 'st';
+  for (let i=1; i<=numInnings; i++) {
+    homePoints += inning();
+    awayPoints += inning();
+    if (i === 2) whichInning = 'nd';
+    if (i === 3) whichInning = 'rd';
+    if (i >= 4) whichInning = 'th';
+    scoreString += `${i+whichInning} inning: ${homePoints} - ${awayPoints}\n`;
+  }
+  scoreString += `\nFinal Score: ${homePoints} - ${awayPoints}`;
+
+  return scoreString;
 }
+console.log(scoreboard(inning, 9));
 
 
