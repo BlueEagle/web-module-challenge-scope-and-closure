@@ -42,7 +42,7 @@ Find the file `index.js` and complete the tasks.
 Edit the `ReadMe` file with your answers.
 
 1. In your own words, define closure (1-2 sentences).
-A closure is a function stored in a variable which contains state information. This state can be accessed by invoking the function.
+A closure is a function stored in a variable which contains state information. This state can be modified by invoking the function.
 
 2. Study the following code, then answer the questions below.
 
@@ -65,8 +65,13 @@ dansRoll();
 ```
 
 a. Where is closure used in this code? How can you tell?
+Closure is used in the personalDice function to hold the name of the person who's dice it is. `name` is the persistent state attribute.
+
 b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
-c. What is the lexical scope of `newRoll`? 
+The name value in dansRoll will always be 'Dan', unless it a new name is passed to the function. The roll value changes with each call.
+
+c. What is the lexical scope of `newRoll`?
+The lexical scope of newRoll is the anonymous function inside personalDice. It is a block scope variable.
 
 ### Task 3 - Stretch Goals
 
